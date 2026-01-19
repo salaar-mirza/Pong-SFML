@@ -14,7 +14,7 @@ namespace Gameplay
 	{
 	private:
 		//Properties
-		float ball_speed = 0.5f;
+		float ball_speed = 0.25f;
 		Vector2f velocity = Vector2f(ball_speed, ball_speed);
 
 		Texture pong_ball_texture;

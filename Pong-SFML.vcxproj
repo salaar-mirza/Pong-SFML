@@ -150,6 +150,8 @@
     <ClInclude Include="Header\GamePlay\Boundary\Boundary.h" />
     <ClInclude Include="Header\GamePlay\GmameplayManager.h" />
     <ClInclude Include="Header\GamePlay\Paddle\Paddle.h" />
+    <ClInclude Include="Header\Utility\TimeService.h" />
+    <ClInclude Include="Source\Utility\TimeService.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\Ball.png" />
