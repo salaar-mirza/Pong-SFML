@@ -16,6 +16,7 @@ namespace Gameplay
 
 	void Paddle::reset(float position_x, float position_y)
 	{
+		paddle_sprite.setPosition(position_x, position_y);
 	}
 
 	void Paddle::movePaddle(float delta_time, bool move_up_key_pressed, bool move_down_key_pressed)

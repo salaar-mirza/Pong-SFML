@@ -36,6 +36,8 @@ namespace Gameplay
 	public:
 		GameplayManager(EventManager* manager);
 		~GameplayManager();
+		void UpdateScore();
+		void resetPlayers();
 		void update(float delta_time);
 		void render(RenderWindow* game_window);
 

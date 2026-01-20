@@ -221,6 +221,11 @@
     <ClCompile Include="Source\Utility\TimeService.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Assets\Textures\Ball.png" />
+    <Image Include="Assets\Textures\HorizontalLine.png" />
+    <Image Include="Assets\Textures\Paddle.png" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="Header\Core\GameLoop.h" />
     <ClInclude Include="Header\Core\GameWindowManager.h" />
     <ClInclude Include="Header\Event\EventManager.h" />
@@ -230,11 +235,6 @@
     <ClInclude Include="Header\GamePlay\Paddle\Paddle.h" />
     <ClInclude Include="Header\UI\UIService.h" />
     <ClInclude Include="Header\Utility\TimeService.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Assets\Textures\Ball.png" />
-    <Image Include="Assets\Textures\HorizontalLine.png" />
-    <Image Include="Assets\Textures\Paddle.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
