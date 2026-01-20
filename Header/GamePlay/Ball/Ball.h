@@ -14,8 +14,8 @@ namespace Gameplay
 	{
 	private:
 		//Properties
-		// Speed is now in pixels per second. 
-		
+		 
+		// Speed is now in pixels per second.
 		const float ball_speed = 500.0f;
 		Vector2f velocity = Vector2f(ball_speed, ball_speed);
 
@@ -39,6 +39,10 @@ namespace Gameplay
 		//Center Position
 		const float center_position_x = 615.0f;
 		const float center_position_y = 325.0f;
+		
+        //Collision Detection
+		bool had_left_collison = false;
+		bool had_right_collison = false;
 
 
 		void loadTexture();
@@ -53,9 +57,17 @@ namespace Gameplay
 		void update(float delat_time, Paddle* player1, Paddle* player2);
 
 		void handlePaddleCollision(Paddle* player1, Paddle* player2);
+		
+		bool isLeftCollisionOccurred();
+		void updateLeftCollisionState(bool value);
+		
+		
+		bool isRightCollisionOccurred();
+		void updateRightCollisionState(bool value);
 
 		void handleBoudaryCollision();
 		void handleOutofBoundCollision();
+		
 		void onCollision(Paddle* player1, Paddle* player2);
 
 
