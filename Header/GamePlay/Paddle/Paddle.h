@@ -6,7 +6,9 @@ namespace Gameplay
 	class Paddle
 	{
 	private:
-		const float paddleSpeed = 0.5f;
+		// Speed is now in pixels per second. A value of 0.5f is too small.
+		// Let's set it to a more reasonable value like 400 pixels/second.
+		const float paddleSpeed = 400.0f;
 
 		RectangleShape paddle_sprite;
 
@@ -16,7 +18,7 @@ namespace Gameplay
 		const float topBoundary = 20.0f;
 		const float bottomBoundary = 700.0f;
 
-		void movePaddle(bool move_up_key_pressed, bool move_down_key_pressed);
+		void movePaddle(float delta_time, bool move_up_key_pressed, bool move_down_key_pressed);
 		
 	public:
 		Paddle(float position_x,float position_y);
@@ -24,7 +26,7 @@ namespace Gameplay
 		RectangleShape getPaddleSprite();
 		void reset(float position_x, float position_y);
 
-		void update(bool move_up_key_pressed,bool down_key_pressed);
+		void update(float delta_time, bool move_up_key_pressed,bool down_key_pressed);
 		void render(RenderWindow* game_window);
 
 	};

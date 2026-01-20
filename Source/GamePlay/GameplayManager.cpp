@@ -24,13 +24,13 @@ namespace Gameplay
 
 
 	
-	void GameplayManager::update()
+	void GameplayManager::update(float delta_time)
 	{
 		ball->update(player1,player2);
 
-		player1->update(event_manager->isKeyPressed(Keyboard::W),
+		player1->update(delta_time, event_manager->isKeyPressed(Keyboard::W),
 			event_manager->isKeyPressed(Keyboard::S));
-		player2->update(event_manager->isKeyPressed(Keyboard::Up),
+		player2->update(delta_time, event_manager->isKeyPressed(Keyboard::Up),
 			event_manager->isKeyPressed(Keyboard::Down));
 
 	}
