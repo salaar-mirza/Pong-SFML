@@ -8,6 +8,7 @@ namespace Core {
 		event_manager = new EventManager();
 		gameplay_manager = new GameplayManager(event_manager);
 		time_service = new TimeService();
+		//ui_service = new UIService();
 
 		game_window_manager->initialize();
 		time_service->initialize();
@@ -39,6 +40,7 @@ namespace Core {
 		//render ball & Paddles 
 		gameplay_manager->render(game_window_manager->getGameWindow());
 		game_window_manager->displayGameWindow();
+		//ui_service->render(game_window_manager->getGameWindow());
 	}
 
 }

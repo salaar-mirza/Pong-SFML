@@ -2,9 +2,11 @@
 #include"../../Header/GamePlay/Ball/Ball.h"
 #include"../../Header/GamePlay/Paddle/Paddle.h"
 #include"../../Header/GamePlay/Boundary/Boundary.h"
+#include "../UI/UIService.h"
 //#include"../../Header/Event/EventManager.h"
 
 using namespace Events;
+using namespace UI;
 
 namespace Gameplay
 {
@@ -24,13 +26,16 @@ namespace Gameplay
 		Boundary* boundary;
 
 
-		void initialize();
-
 		EventManager* event_manager;
+		UIService* ui_service;
+
+		void initialize();
+		
 
 
 	public:
 		GameplayManager(EventManager* manager);
+		~GameplayManager();
 		void update(float delta_time);
 		void render(RenderWindow* game_window);
 

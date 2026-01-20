@@ -4,6 +4,7 @@ namespace Core {
 
 	void GameWindowManager::initialize()
 	{
+		
 		//Allocte memory for the render window object
 		game_window = new RenderWindow();
 		//Set up window with the configured properties
