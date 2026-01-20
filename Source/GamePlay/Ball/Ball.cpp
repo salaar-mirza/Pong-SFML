@@ -90,15 +90,16 @@ namespace Gameplay {
 		velocity = Vector2f(ball_speed, ball_speed);
 	}
 
-	void Ball::move()
+	/*void Ball::move()
 	{
 		pong_ball_sprite.move(velocity);
-	}
+	}*/
 
 
-	 void Ball::update(Paddle* player1, Paddle* player2)
+	 void Ball::update(float delta_time,Paddle* player1, Paddle* player2)
 	 {
-		 move();
+		 /*move();*/
+   	     pong_ball_sprite.move(velocity.x *delta_time,velocity.y *delta_time);
 		 onCollision(player1,player2);
 
 	 }
