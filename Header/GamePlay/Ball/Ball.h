@@ -14,7 +14,9 @@ namespace Gameplay
 	{
 	private:
 		//Properties
-		float ball_speed = 0.5f;
+		// Speed is now in pixels per second. 
+		
+		const float ball_speed = 500.0f;
 		Vector2f velocity = Vector2f(ball_speed, ball_speed);
 
 		Texture pong_ball_texture;
@@ -48,7 +50,7 @@ namespace Gameplay
 	public:
 		Ball();
 
-		void update(Paddle* player1, Paddle* player2);
+		void update(float delat_time, Paddle* player1, Paddle* player2);
 
 		void handlePaddleCollision(Paddle* player1, Paddle* player2);
 

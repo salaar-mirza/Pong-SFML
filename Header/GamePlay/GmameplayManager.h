@@ -31,7 +31,7 @@ namespace Gameplay
 
 	public:
 		GameplayManager(EventManager* manager);
-		void update();
+		void update(float delta_time);
 		void render(RenderWindow* game_window);
 
 

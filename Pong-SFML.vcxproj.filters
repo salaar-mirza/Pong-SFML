@@ -89,6 +89,12 @@
     <ClInclude Include="Header\GamePlay\Boundary\Boundary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Header\Utility\TimeService.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Utility\TimeService.cpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\Textures\Ball.png">
