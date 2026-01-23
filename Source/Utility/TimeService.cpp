@@ -1,7 +1,14 @@
-#include"../../Header/Utility/TimeService.h"
+#include "../../Header/Utility/TimeService.h"
 
 namespace Utility
 {
+	TimeService::TimeService() : delta_time(0.0f)
+	{
+	}
+
+	TimeService::~TimeService()
+	{
+	}
 
     void TimeService::initialize()
     {
@@ -12,7 +19,7 @@ namespace Utility
     float TimeService::calculateDeltaTime()
     {
         // Get time difference in microseconds
-        int delta = std::chrono::duration_cast<std::chrono::microseconds>(
+        long long delta = std::chrono::duration_cast<std::chrono::microseconds>(
             std::chrono::steady_clock::now() - previous_time).count();
 
         // Convert to seconds

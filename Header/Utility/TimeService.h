@@ -5,19 +5,20 @@ namespace Utility
 {
     class TimeService
     {
+    public:
+        TimeService();
+        ~TimeService();
+
+        void initialize();
+        void update();
+        float getDeltaTime();
+
     private:
         std::chrono::steady_clock::time_point previous_time;
         float delta_time;
 
         void updateDeltaTime();
         float calculateDeltaTime();
-        void updatePreviousTime(); // Update previous_time to the current time
-
-    public:
-
-        void initialize();
-        void update();
-        float getDeltaTime();
-
+        void updatePreviousTime();
     };
 }

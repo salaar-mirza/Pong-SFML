@@ -1,50 +1,45 @@
-#include"../../Header/Core/GameWindowManager.h"
+#include "../../Header/Core/GameWindowManager.h"
 
-namespace Core {
+namespace Core
+{
+	GameWindowManager::GameWindowManager()
+	{
+		game_window = nullptr;
+	}
+
+	GameWindowManager::~GameWindowManager()
+	{
+		delete game_window;
+	}
 
 	void GameWindowManager::initialize()
 	{
-		
-		//Allocte memory for the render window object
-		game_window = new RenderWindow();
-		//Set up window with the configured properties
+		game_window = new sf::RenderWindow();
 		createGameWindow();
-
 	}
-
 
 	void GameWindowManager::createGameWindow()
 	{
-		//Create the Window with specified dimensions and title
-		game_window->create(VideoMode(game_window_width, game_window_hight), game_title);
-	     // game_window->create(VideoMode::getDesktopMode(), game_title, Style::Fullscreen);
+		game_window->create(sf::VideoMode(game_window_width, game_window_height), game_title);
 	}
-
 
 	bool GameWindowManager::isGameRunning()
 	{
-		//Return true if window is open, false if closed
 		return game_window->isOpen();
-
 	}
 
-	
-
-	RenderWindow* GameWindowManager::getGameWindow() 
+	sf::RenderWindow* GameWindowManager::getGameWindow()
 	{
 		return game_window;
 	}
 
 	void GameWindowManager::clearGameWindow()
 	{
-		game_window->clear(Color(200, 50, 50, 255));
-
+		game_window->clear(sf::Color(200, 50, 50, 255));
 	}
 
 	void GameWindowManager::displayGameWindow()
 	{
-		return game_window->display();
+		game_window->display();
 	}
-
-
 }

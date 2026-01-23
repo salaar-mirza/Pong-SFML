@@ -11,24 +11,20 @@ namespace Sounds
 
     class SoundManager
     {
-    private:
-        static sf::Music backgroundMusic;
-        static sf::Sound soundEffect;
-        static sf::SoundBuffer ballBounce;
-
-        static float backgroundMusicVolume;
-        static const std::string bgmPath;
-        static const std::string ballBouncePath;
-				
-       
-    
     public:
-        static void Initialize();
-        static void LoadSoundFromFile();
-        
+        static void initialize();
+        static void playSoundEffect(SoundType soundType);
+        static void playBackgroundMusic();
 
-        
-        static void PlaySoundEffect(SoundType soundType);
-        static void PlayBackgroundMusic();
+    private:
+        static sf::Music background_music;
+        static sf::Sound sound_effect;
+        static sf::SoundBuffer ball_bounce_buffer;
+
+        static float background_music_volume;
+        static const std::string bgm_path;
+        static const std::string ball_bounce_path;
+
+        static void loadSoundFromFile();
     };
 }

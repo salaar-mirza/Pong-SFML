@@ -232,7 +232,7 @@
     <ClInclude Include="Header\Event\EventManager.h" />
     <ClInclude Include="Header\GamePlay\Ball\Ball.h" />
     <ClInclude Include="Header\GamePlay\Boundary\Boundary.h" />
-    <ClInclude Include="Header\GamePlay\GmameplayManager.h" />
+    <ClInclude Include="Header\GamePlay\GameplayManager.h" />
     <ClInclude Include="Header\GamePlay\Paddle\Paddle.h" />
     <ClInclude Include="Header\Sounds\SoundManager.h" />
     <ClInclude Include="Header\UI\UIService.h" />

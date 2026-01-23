@@ -1,38 +1,33 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-#include "../../Header/Core/GameWindowManager.h"
-#include "../../Header/Event/EventManager.h"
-#include "../../Header/GamePlay/GmameplayManager.h"
-#include "../../Header/Utility/TimeService.h"
-#include "../UI/UIService.h"
 
-
-using namespace sf;
-using namespace Core;
-using namespace Events;
-using namespace Gameplay;
-using namespace Utility;
-using namespace UI;
-using namespace std;
+// Forward declarations instead of includes
+// This reduces compile times and unnecessary dependencies.
+namespace Core { class GameWindowManager; }
+namespace Events { class EventManager; }
+namespace Gameplay { class GameplayManager; }
+namespace Utility { class TimeService; }
+namespace Sounds { class SoundManager; }
 
 namespace Core
 {
 	class GameLoop
 	{
-	private:
-		GameWindowManager* game_window_manager;
-		EventManager* event_manager;
-		GameplayManager* gameplay_manager;
-		TimeService* time_service;
-		SoundManager* sound_manager;
-		
-		
 	public:
-		void initialize();
+		GameLoop();
+		~GameLoop();
 
-		bool isGameRunning();
+		void initialize();
 		void pollEvent();
 		void update();
 		void render();
+		bool isGameRunning();
+
+	private:
+		// The compiler knows the size of a pointer, so this is fine.
+		GameWindowManager* game_window_manager;
+		Events::EventManager* event_manager;
+		Gameplay::GameplayManager* gameplay_manager;
+		Utility::TimeService* time_service;
+		Sounds::SoundManager* sound_manager;
 	};
 }

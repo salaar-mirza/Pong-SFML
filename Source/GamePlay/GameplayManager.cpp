@@ -1,78 +1,92 @@
+#include "../../Header/GamePlay/GameplayManager.h"
+#include "../../Header/GamePlay/Ball/Ball.h"
+#include "../../Header/GamePlay/Paddle/Paddle.h"
+#include "../../Header/GamePlay/Boundary/Boundary.h"
+#include "../../Header/UI/UIService.h"
 #include "../../Header/Event/EventManager.h"
 
-#include "../../Header/GamePlay/GmameplayManager.h"
-
-using namespace sf;
-
-
-namespace Gameplay 
+namespace Gameplay
 {
 	GameplayManager::GameplayManager(Events::EventManager* manager)
 	{
 		event_manager = manager;
-		GameplayManager::initialize();
-
+		ball = nullptr;
+		player1 = nullptr;
+		player2 = nullptr;
+		boundary = nullptr;
+		ui_service = nullptr;
 	}
 
+	GameplayManager::~GameplayManager()
+	{
+		delete ball;
+		delete player1;
+		delete player2;
+		delete boundary;
+		delete ui_service;
+	}
 
 	void GameplayManager::initialize()
 	{
-		    boundary = new Boundary();
-			ball = new Ball();
-			player1 = new Paddle(player1_position_x, player1_position_y);
-			player2 = new Paddle(player2_position_x, player2_position_y);
-		    ui_service = new UIService();
+		boundary = new Boundary();
+		boundary->initialize();
 
+		ball = new Ball();
+		ball->initialize();
+
+		player1 = new Paddle(player1_position_x, player1_position_y);
+		player1->initialize();
+
+		player2 = new Paddle(player2_position_x, player2_position_y);
+		player2->initialize();
+
+		ui_service = new UI::UIService();
+		ui_service->initialize();
 	}
 
-
-	
 	void GameplayManager::update(float delta_time)
 	{
-		ball->update(delta_time,player1,player2);
+		ball->update(delta_time, player1, player2);
 
-		player1->update(delta_time, event_manager->isKeyPressed(Keyboard::W),
-			event_manager->isKeyPressed(Keyboard::S));
-		player2->update(delta_time, event_manager->isKeyPressed(Keyboard::Up),
-			event_manager->isKeyPressed(Keyboard::Down));
+		player1->update(delta_time, event_manager->isKeyPressed(sf::Keyboard::W),
+			event_manager->isKeyPressed(sf::Keyboard::S));
+		player2->update(delta_time, event_manager->isKeyPressed(sf::Keyboard::Up),
+			event_manager->isKeyPressed(sf::Keyboard::Down));
 
-		UpdateScore();
+		updateScore();
 		ui_service->update();
-
 	}
 
-	void GameplayManager::UpdateScore() {
-		// Left side out - Player 2 scores!
-		if (ball->isLeftCollisionOccurred()) {
+	void GameplayManager::updateScore()
+	{
+		if (ball->isLeftCollisionOccurred())
+		{
 			ui_service->incrementPlayer2Score();
 			ball->updateLeftCollisionState(false);
-			resetPlayers(); 
+			resetPlayers();
 		}
 
-		// Right side out - Player 1 scores!
-		if (ball->isRightCollisionOccurred()) {
+		if (ball->isRightCollisionOccurred())
+		{
 			ui_service->incrementPlayer1Score();
 			ball->updateRightCollisionState(false);
-			resetPlayers();  
+			resetPlayers();
 		}
 	}
 
-	void GameplayManager::resetPlayers() {
+	void GameplayManager::resetPlayers()
+	{
 		player1->reset(player1_position_x, player1_position_y);
 		player2->reset(player2_position_x, player2_position_y);
+		ball->reset();
 	}
 
-
-	void GameplayManager::render(RenderWindow* game_window)
+	void GameplayManager::render(sf::RenderWindow* game_window)
 	{
 		boundary->render(game_window);
 		ball->render(game_window);
 		player1->render(game_window);
 		player2->render(game_window);
 		ui_service->render(game_window);
-
 	}
-
-
-
 }
