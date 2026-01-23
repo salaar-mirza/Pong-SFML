@@ -9,6 +9,7 @@ namespace Gameplay
 {
 	GameplayManager::GameplayManager(Events::EventManager* manager)
 	{
+		event_manager = manager;
 		GameplayManager::initialize();
 
 	}

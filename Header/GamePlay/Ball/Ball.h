@@ -1,11 +1,13 @@
 #pragma once
 #include"../../Header/GamePlay/Paddle/Paddle.h"
+#include "../../Header/Sounds/SoundManager.h"
 #include<SFML/Graphics.hpp>
 
 //#include<string.h>
 
 using namespace sf;
 using namespace std;
+using namespace Sounds;
 
 namespace Gameplay
 {
