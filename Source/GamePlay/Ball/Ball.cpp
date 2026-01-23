@@ -1,152 +1,123 @@
-#include"../../Header/GamePlay/Ball/Ball.h"
-using namespace sf;
+#include "../../Header/GamePlay/Ball/Ball.h"
+#include "../../Header/GamePlay/Paddle/Paddle.h"
+#include "../../Header/Sounds/SoundManager.h"
+#include <stdexcept>
 
-namespace Gameplay {
-
-
-   Ball::Ball()
+namespace Gameplay
+{
+	Ball::Ball()
 	{
-		
-	   loadTexture();
-	   initializeVariables();
-
+		velocity = sf::Vector2f(ball_speed, ball_speed);
 	}
 
+	Ball::~Ball()
+	{
+	}
 
-   void Ball::loadTexture()
-   {
-	   if (!pong_ball_texture.loadFromFile(texture_path))
-	   {
-		   throw std::runtime_error("Failed to load ball texture!");
-	   }
-	  // pong_ball_texture.loadFromFile(texture_path);
-   }
+	void Ball::initialize()
+	{
+		loadTexture();
+		initializeVariables();
+	}
+
+	void Ball::loadTexture()
+	{
+		if (!pong_ball_texture.loadFromFile(texture_path))
+		{
+			throw std::runtime_error("Failed to load ball texture!");
+		}
+	}
 
 	void Ball::initializeVariables()
 	{
-		pong_ball_sprite.setTexture(pong_ball_texture);  // Link texture to sprite
-		pong_ball_sprite.setScale(scale_x, scale_y);     // Set size
-		pong_ball_sprite.setPosition(position_x, position_y); // Set position
+		pong_ball_sprite.setTexture(pong_ball_texture);
+		pong_ball_sprite.setScale(scale_x, scale_y);
+		pong_ball_sprite.setPosition(position_x, position_y);
 	}
 
-
-	bool Ball::isLeftCollisionOccurred()
+	void Ball::update(float delta_time, Paddle* player1, Paddle* player2)
 	{
-   	 return had_left_collison;
-    }
-
-	void Ball::updateLeftCollisionState(bool value)
-	{
-    	had_left_collison = value;
-    }
-
-	bool Ball::isRightCollisionOccurred()
-	{
-    	return had_right_collison;
-    }
-
-	void Ball::updateRightCollisionState(bool value)
-	{
-    	had_right_collison = value;
-    }
-
-	
-
-	void Ball::onCollision(Paddle* player1, Paddle* player2)
-	{
-		handleBoudaryCollision();
+		pong_ball_sprite.move(velocity.x * delta_time, velocity.y * delta_time);
+		handleBoundaryCollision();
 		handlePaddleCollision(player1, player2);
-		handleOutofBoundCollision();
+		handleOutOfBoundCollision();
+	}
+
+	void Ball::render(sf::RenderWindow* game_window)
+	{
+		game_window->draw(pong_ball_sprite);
 	}
 
 	void Ball::handlePaddleCollision(Paddle* player1, Paddle* player2)
 	{
-		// 1. Get our sprites
-		const RectangleShape& player1Paddle = player1->getPaddleSprite();
-		const RectangleShape& player2Paddle = player2->getPaddleSprite();
+		const sf::RectangleShape& player1Paddle = player1->getPaddleSprite();
+		const sf::RectangleShape& player2Paddle = player2->getPaddleSprite();
 
-		// 2. Check their bounds
-		FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
-		FloatRect player1_bounds = player1Paddle.getGlobalBounds();
-		FloatRect player2_bounds = player2Paddle.getGlobalBounds();
+		sf::FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
+		sf::FloatRect player1_bounds = player1Paddle.getGlobalBounds();
+		sf::FloatRect player2_bounds = player2Paddle.getGlobalBounds();
 
-		// 3. Handle collisions
 		if (ball_bounds.intersects(player1_bounds) && velocity.x < 0)
 		{
-			velocity.x = -velocity.x;  // Bounce!
-			SoundManager::PlaySoundEffect(SoundType::BALL_BOUNCE);
-
+			velocity.x = -velocity.x;
+			Sounds::SoundManager::playSoundEffect(Sounds::SoundType::BALL_BOUNCE);
 		}
 		if (ball_bounds.intersects(player2_bounds) && velocity.x > 0)
 		{
-			velocity.x = -velocity.x;  // Reverse horizontal direction
-			SoundManager::PlaySoundEffect(SoundType::BALL_BOUNCE);
-
+			velocity.x = -velocity.x;
+			Sounds::SoundManager::playSoundEffect(Sounds::SoundType::BALL_BOUNCE);
 		}
-
 	}
 
-
-
-	
-
-	void Ball::handleBoudaryCollision()
+	void Ball::handleBoundaryCollision()
 	{
-		FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
+		sf::FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
 
 		if ((ball_bounds.top <= top_boundary && velocity.y < 0) ||
 			(ball_bounds.top + ball_bounds.height >= bottom_boundary && velocity.y > 0))
 		{
-			velocity.y = -velocity.y;  // Reverse vertical direction
-			SoundManager::PlaySoundEffect(SoundType::BALL_BOUNCE);
-
+			velocity.y = -velocity.y;
+			Sounds::SoundManager::playSoundEffect(Sounds::SoundType::BALL_BOUNCE);
 		}
 	}
 
-	void Ball::handleOutofBoundCollision()
+	void Ball::handleOutOfBoundCollision()
 	{
-		FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
+		sf::FloatRect ball_bounds = pong_ball_sprite.getGlobalBounds();
 
 		if (ball_bounds.left <= left_boundary)
 		{
 			updateLeftCollisionState(true);
-			reset();        // Player 2 scores!
 		}
 		else if (ball_bounds.left + ball_bounds.width >= right_boundary)
 		{
 			updateRightCollisionState(true);
-			reset();        // Player 1 scores!
 		}
 	}
 
 	void Ball::reset()
 	{
 		pong_ball_sprite.setPosition(center_position_x, center_position_y);
-		velocity = Vector2f(ball_speed, ball_speed);
+		velocity = sf::Vector2f(ball_speed, ball_speed);
 	}
 
-	/*void Ball::move()
+	bool Ball::isLeftCollisionOccurred()
 	{
-		pong_ball_sprite.move(velocity);
-	}*/
+		return had_left_collison;
+	}
 
+	void Ball::updateLeftCollisionState(bool value)
+	{
+		had_left_collison = value;
+	}
 
-	 void Ball::update(float delta_time,Paddle* player1, Paddle* player2)
-	 {
-		 /*move();*/
-   	     pong_ball_sprite.move(velocity.x *delta_time,velocity.y *delta_time);
-		 onCollision(player1,player2);
+	bool Ball::isRightCollisionOccurred()
+	{
+		return had_right_collison;
+	}
 
-	 }
-
-	
-
-	 void Ball::render(RenderWindow* game_window)
-	 {
-
-		 game_window->draw(pong_ball_sprite);
-
-	 }
-      
-
+	void Ball::updateRightCollisionState(bool value)
+	{
+		had_right_collison = value;
+	}
 }

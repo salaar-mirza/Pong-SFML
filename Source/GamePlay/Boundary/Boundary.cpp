@@ -1,8 +1,16 @@
-#include"../../Header/GamePlay/Boundary/Boundary.h"
+#include "../../Header/GamePlay/Boundary/Boundary.h"
 
-namespace Gameplay{
-
+namespace Gameplay
+{
 	Boundary::Boundary()
+	{
+	}
+
+	Boundary::~Boundary()
+	{
+	}
+
+	void Boundary::initialize()
 	{
 		createTopBoundary();
 		createBottomBoundary();
@@ -13,55 +21,45 @@ namespace Gameplay{
 
 	void Boundary::createTopBoundary()
 	{
-		topBoundary.setSize(Vector2f(horizontal_boundary_width, horizontal_boundary_height));
-		topBoundary.setPosition(top_position_x, top_position_y);
-		topBoundary.setFillColor(boundary_color);
+		top_boundary.setSize(horizontal_boundary_size);
+		top_boundary.setPosition(top_position);
+		top_boundary.setFillColor(boundary_color);
 	}
+
 	void Boundary::createBottomBoundary()
 	{
-		bottomBoundary.setSize(Vector2f(horizontal_boundary_width, horizontal_boundary_height));
-		bottomBoundary.setPosition(bottom_position_x, bottom_position_y);
-		bottomBoundary.setFillColor(boundary_color);
-
+		bottom_boundary.setSize(horizontal_boundary_size);
+		bottom_boundary.setPosition(bottom_position);
+		bottom_boundary.setFillColor(boundary_color);
 	}
+
 	void Boundary::createLeftBoundary()
 	{
-		leftBoundary.setSize(Vector2f(vertical_boundary_width, vertical_boundary_height));
-		leftBoundary.setPosition(left_position_x, left_position_y);
-		leftBoundary.setFillColor(boundary_color);
+		left_boundary.setSize(vertical_boundary_size);
+		left_boundary.setPosition(left_position);
+		left_boundary.setFillColor(boundary_color);
 	}
+
 	void Boundary::createRightBoundary()
 	{
-		rightBoundary.setSize(Vector2f(vertical_boundary_width, vertical_boundary_height));
-		rightBoundary.setPosition(right_position_x, right_position_y);
-		rightBoundary.setFillColor(boundary_color);
+		right_boundary.setSize(vertical_boundary_size);
+		right_boundary.setPosition(right_position);
+		right_boundary.setFillColor(boundary_color);
 	}
+
 	void Boundary::createCenterLine()
 	{
-		centerLine.setSize(Vector2f(center_line_width, center_line_height));
-		centerLine.setPosition(center_line_position_x, center_line_position_y);
-		centerLine.setFillColor(center_line_color);
+		center_line.setSize(center_line_size);
+		center_line.setPosition(center_line_position);
+		center_line.setFillColor(center_line_color);
 	}
-	
 
-	void Boundary::update()
+	void Boundary::render(sf::RenderWindow* game_window)
 	{
+		game_window->draw(top_boundary);
+		game_window->draw(bottom_boundary);
+		game_window->draw(left_boundary);
+		game_window->draw(right_boundary);
+		game_window->draw(center_line);
 	}
-
-	void Boundary::render(RenderWindow* game_window)
-	{
-		game_window->draw(topBoundary);
-		game_window->draw(leftBoundary);
-		game_window->draw(centerLine);
-		game_window->draw(rightBoundary);
-		game_window->draw(bottomBoundary);
-		
-
-
-	}
-
-
-
-
-
 }

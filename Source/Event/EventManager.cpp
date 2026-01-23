@@ -1,19 +1,22 @@
-#include"../../Header/Event/EventManager.h"
-#include <iostream>
-//#include<SFML/Graphics.hpp>
-using namespace sf;
+#include "../../Header/Event/EventManager.h"
 
-namespace Events {
+namespace Events
+{
+	EventManager::EventManager()
+	{
+	}
 
-	
-	void EventManager::pollEvents(RenderWindow* game_window)
+	EventManager::~EventManager()
+	{
+	}
+
+	void EventManager::pollEvents(sf::RenderWindow* game_window)
 	{
 		sf::Event event;
 
 		while (game_window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-	
 			{
 				game_window->close();
 			}
@@ -22,19 +25,11 @@ namespace Events {
 			{
 				game_window->close();
 			}
-
-			if (isLeftMouseButtonClicked())
-			{
-				Vector2i position = Mouse::getPosition(*game_window);
-
-				//Loag the mouse Position
-				std::cout << "Left Mouse Click at: " << position.x << "," << position.y << std::endl;
-			}
 		}
 	}
 
-	bool EventManager::isKeyPressed(sf::Keyboard::Key key) {
-		// Detect if a specific key is pressed
+	bool EventManager::isKeyPressed(sf::Keyboard::Key key)
+	{
 		return sf::Keyboard::isKeyPressed(key);
 	}
 
@@ -42,6 +37,4 @@ namespace Events {
 	{
 		return (sf::Mouse::isButtonPressed(sf::Mouse::Left));
 	}
-
-
 }
