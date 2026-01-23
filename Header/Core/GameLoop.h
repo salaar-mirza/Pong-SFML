@@ -24,7 +24,7 @@ namespace Core
 		EventManager* event_manager;
 		GameplayManager* gameplay_manager;
 		TimeService* time_service;
-		//UIService* ui_service;
+		SoundManager* sound_manager;
 		
 		
 	public:

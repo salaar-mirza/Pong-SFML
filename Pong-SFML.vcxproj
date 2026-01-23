@@ -141,6 +141,7 @@
     <ClCompile Include="Source\GamePlay\Boundary\Boundary.cpp" />
     <ClCompile Include="Source\GamePlay\GameplayManager.cpp" />
     <ClCompile Include="Source\GamePlay\Paddle\Paddle.cpp" />
+    <ClCompile Include="Source\Sounds\SoundManager.cpp" />
     <ClCompile Include="Source\UI\UIService.cpp">
       <RuntimeLibrary>MultiThreadedDebugDll</RuntimeLibrary>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -233,6 +234,7 @@
     <ClInclude Include="Header\GamePlay\Boundary\Boundary.h" />
     <ClInclude Include="Header\GamePlay\GmameplayManager.h" />
     <ClInclude Include="Header\GamePlay\Paddle\Paddle.h" />
+    <ClInclude Include="Header\Sounds\SoundManager.h" />
     <ClInclude Include="Header\UI\UIService.h" />
     <ClInclude Include="Header\Utility\TimeService.h" />
   </ItemGroup>
